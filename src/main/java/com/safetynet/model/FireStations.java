@@ -7,18 +7,18 @@ public class FireStations {
 
 	private String address;
 
-	private int stationId;
+	private int stationNumber;
 
 	public FireStations() {
 	}
 
-	public FireStations(String address, int stationId) {
+	public FireStations(String address, int stationNumber) {
 		this.address = address;
-		this.stationId = stationId;
+		this.stationNumber = stationNumber;
 	}
 
 	@Override
 	public String toString() {
-		return "Firestations {" + address + "," + stationId + '}';
+		return "Firestations {" + address + "," + stationNumber + '}';
 	}
 }

@@ -6,7 +6,7 @@ public class Persons {
 
 	private String lastName;
 
-	private String address;
+	private String personsAddress;
 
 	private String city;
 
@@ -19,14 +19,14 @@ public class Persons {
 	public Persons() {
 	}
 
-	public Persons(String firstName, String lastName, String address, String city, String zip, String phone,
+	public Persons(String firstName, String lastName, String personsAddress, String city, String zip, String phone,
 			String email) {
 
 		this.firstName = firstName;
 
 		this.lastName = lastName;
 
-		this.address = address;
+		this.personsAddress = personsAddress;
 
 		this.city = city;
 
@@ -46,11 +46,11 @@ public class Persons {
 	}
 
 	public String getAddress() {
-		return address;
+		return personsAddress;
 	}
 
-	public void setAddress(String address) {
-		this.address = address;
+	public void setAddress(String personsAddress) {
+		this.personsAddress = personsAddress;
 	}
 
 	public String getCity() {
@@ -87,7 +87,7 @@ public class Persons {
 
 	@Override
 	public String toString() {
-		return "Persons{" + firstName + "," + lastName + "," + address + "," + city + "," + zip + "," + phone + ","
-				+ email + '}';
+		return "Persons{" + firstName + "," + lastName + "," + personsAddress + "," + city + "," + zip + "," + phone
+				+ "," + email + '}';
 	}
 }
