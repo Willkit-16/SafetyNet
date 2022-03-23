@@ -4,10 +4,10 @@ import java.util.ArrayList;
 
 public class Data {
 
-	ArrayList<Persons> arrayPerson = new ArrayList<Persons>();
+	public static ArrayList<Person> arrayPerson = new ArrayList<Person>();
 
-	ArrayList<FireStations> arrayFirestations = new ArrayList<FireStations>();
+	public static ArrayList<FireStations> arrayFS = new ArrayList<FireStations>();
 
-	ArrayList<MedicalRecords> arrayMedicalRecords = new ArrayList<MedicalRecords>();
+	public static ArrayList<MedicalRecords> arrayMR = new ArrayList<MedicalRecords>();
 
 }

@@ -9,7 +9,14 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import org.springframework.stereotype.Repository;
 
+import com.safetynet.model.Data;
+import com.safetynet.model.FireStations;
+import com.safetynet.model.MedicalRecords;
+import com.safetynet.model.Person;
+
+@Repository
 public class AlertsReader {
 	@SuppressWarnings("unchecked")
 	public void readDataFromJson() throws FileNotFoundException, IOException {
@@ -20,26 +27,37 @@ public class AlertsReader {
 
 			JSONObject jsonObject = (JSONObject) obj;
 
-			JSONArray listOfPersons = (JSONArray) jsonObject.get("persons");
+			JSONArray listOfPerson = (JSONArray) jsonObject.get("persons");
 
-			Iterator<JSONObject> iteratorPersons = listOfPersons.iterator();
+			Iterator<JSONObject> iteratorPerson = listOfPerson.iterator();
 
 			JSONArray listOfFirestation = (JSONArray) jsonObject.get("firestations");
 
-			Iterator<JSONObject> iteratorFirestations = listOfFirestation.iterator();
+			Iterator<JSONObject> iteratorFireStations = listOfFirestation.iterator();
 
 			JSONArray listOfMedicalrecords = (JSONArray) jsonObject.get("medicalrecords");
 
-			Iterator<JSONObject> iteratorMedicalrecords = listOfMedicalrecords.iterator();
+			Iterator<JSONObject> iteratorMedicalRecords = listOfMedicalrecords.iterator();
 
-			while (iteratorPersons.hasNext()) {
-				System.out.println(iteratorPersons.next());
+			while (iteratorPerson.hasNext()) {
+				JSONObject jPerson = iteratorPerson.next();
+				Person person = new Person(jPerson.get("firstName").toString(), jPerson.get("lastName").toString(),
+						jPerson.get("address").toString(), jPerson.get("city").toString(),
+						jPerson.get("zip").toString(), jPerson.get("phone").toString(),
+						jPerson.get("email").toString());
+				Data.arrayPerson.add(person);
 			}
-			while (iteratorFirestations.hasNext()) {
-				System.out.println(iteratorFirestations.next());
+			while (iteratorFireStations.hasNext()) {
+				JSONObject jFS = iteratorFireStations.next();
+				FireStations fireS = new FireStations(jFS.get("address").toString(), jFS.get("station").toString());
+				Data.arrayFS.add(fireS);
 			}
-			while (iteratorMedicalrecords.hasNext()) {
-				System.out.println(iteratorMedicalrecords.next());
+			while (iteratorMedicalRecords.hasNext()) {
+				JSONObject jMR = iteratorMedicalRecords.next();
+				MedicalRecords medicalR = new MedicalRecords(jMR.get("firstName").toString(),
+						jMR.get("lastName").toString(), jMR.get("birthdate").toString(),
+						jMR.get("medications").toString(), jMR.get("allergies").toString());
+				Data.arrayMR.add(medicalR);
 			}
 
 		} catch (ParseException e) {

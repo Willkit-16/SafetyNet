@@ -7,12 +7,12 @@ public class FireStations {
 
 	private String address;
 
-	private int stationNumber;
+	private String stationNumber;
 
 	public FireStations() {
 	}
 
-	public FireStations(String address, int stationNumber) {
+	public FireStations(String address, String stationNumber) {
 		this.address = address;
 		this.stationNumber = stationNumber;
 	}

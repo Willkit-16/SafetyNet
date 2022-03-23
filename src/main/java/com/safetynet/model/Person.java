@@ -1,6 +1,6 @@
 package com.safetynet.model;
 
-public class Persons {
+public class Person {
 
 	private String firstName;
 
@@ -16,10 +16,10 @@ public class Persons {
 
 	private String email;
 
-	public Persons() {
+	public Person() {
 	}
 
-	public Persons(String firstName, String lastName, String personsAddress, String city, String zip, String phone,
+	public Person(String firstName, String lastName, String personsAddress, String city, String zip, String phone,
 			String email) {
 
 		this.firstName = firstName;
