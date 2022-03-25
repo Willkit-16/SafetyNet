@@ -1,4 +1,4 @@
-package com.safetynet.model;
+package com.safetynet.webappAlerts.model;
 
 public class Person {
 

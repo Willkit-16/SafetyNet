@@ -1,4 +1,4 @@
-package com.safetynet.view;
+package com.safetynet.webappAlerts.view;
 
 public class AlertsViewer {
 

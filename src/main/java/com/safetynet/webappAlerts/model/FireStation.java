@@ -1,18 +1,18 @@
-package com.safetynet.model;
+package com.safetynet.webappAlerts.model;
 
 import lombok.Data;
 
 @Data
-public class FireStations {
+public class FireStation {
 
 	private String address;
 
 	private String stationNumber;
 
-	public FireStations() {
+	public FireStation() {
 	}
 
-	public FireStations(String address, String stationNumber) {
+	public FireStation(String address, String stationNumber) {
 		this.address = address;
 		this.stationNumber = stationNumber;
 	}

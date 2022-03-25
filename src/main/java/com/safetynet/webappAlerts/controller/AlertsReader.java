@@ -1,4 +1,4 @@
-package com.safetynet.controller;
+package com.safetynet.webappAlerts.controller;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -11,10 +11,10 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.springframework.stereotype.Repository;
 
-import com.safetynet.model.Data;
-import com.safetynet.model.FireStations;
-import com.safetynet.model.MedicalRecords;
-import com.safetynet.model.Person;
+import com.safetynet.webappAlerts.model.Data;
+import com.safetynet.webappAlerts.model.FireStation;
+import com.safetynet.webappAlerts.model.MedicalRecords;
+import com.safetynet.webappAlerts.model.Person;
 
 @Repository
 public class AlertsReader {
@@ -49,7 +49,7 @@ public class AlertsReader {
 			}
 			while (iteratorFireStations.hasNext()) {
 				JSONObject jFS = iteratorFireStations.next();
-				FireStations fireS = new FireStations(jFS.get("address").toString(), jFS.get("station").toString());
+				FireStation fireS = new FireStation(jFS.get("address").toString(), jFS.get("station").toString());
 				Data.arrayFS.add(fireS);
 			}
 			while (iteratorMedicalRecords.hasNext()) {
