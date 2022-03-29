@@ -10,8 +10,8 @@ import com.safetynet.webappAlerts.model.Person;
 @Repository
 public class PersonDAO {
 
-	public void addPerson(Person pr) {
-		Data.arrayPerson.add(pr);
+	public boolean addPerson(Person pr) {
+		return Data.arrayPerson.add(pr);
 	}
 
 	public List<Person> getPersons() {

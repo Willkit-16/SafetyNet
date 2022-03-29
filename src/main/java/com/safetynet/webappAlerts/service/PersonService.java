@@ -18,6 +18,12 @@ public class PersonService {
 		return pdao.getPersons();
 	}
 
+	public boolean createAndAddPerson(String firstName, String lastName, String personAddress, String city, String zip,
+			String phone, String email) {
+		Person pr = new Person(firstName, lastName, personAddress, city, zip, phone, email);
+		return pdao.addPerson(pr);
+	}
+
 	public Person findPersonByFirstAndLastName(String firstName, String lastName) {
 		return pdao.findPersonByFirstNameAndLastName(firstName, lastName);
 	}
@@ -26,4 +32,5 @@ public class PersonService {
 		return pdao.deletePersonByFirstAndLastName(firstName, lastName);
 
 	}
+
 }

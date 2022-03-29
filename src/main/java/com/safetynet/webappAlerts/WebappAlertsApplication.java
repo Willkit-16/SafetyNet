@@ -10,6 +10,10 @@ import org.springframework.context.annotation.Configuration;
 
 import com.safetynet.webappAlerts.controller.AlertsReader;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class WebappAlertsApplication.
+ */
 @Configuration
 
 @EnableAutoConfiguration
@@ -17,6 +21,13 @@ import com.safetynet.webappAlerts.controller.AlertsReader;
 @ComponentScan
 public class WebappAlertsApplication {
 
+	/**
+	 * The main method.
+	 *
+	 * @param args the arguments
+	 * @throws FileNotFoundException the file not found exception
+	 * @throws IOException           Signals that an I/O exception has occurred.
+	 */
 	public static void main(String[] args) throws FileNotFoundException, IOException {
 		SpringApplication.run(WebappAlertsApplication.class, args);
 		AlertsReader ar = new AlertsReader();
