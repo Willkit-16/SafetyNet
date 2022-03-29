@@ -16,14 +16,13 @@ public class PersonService {
 
 	public List<Person> getPersons() {
 		return pdao.getPersons();
-
 	}
 
 	public Person findPersonByFirstAndLastName(String firstName, String lastName) {
 		return pdao.findPersonByFirstNameAndLastName(firstName, lastName);
 	}
 
-	public Person deletePersonByFirstAndLastName(String firstName, String lastName) {
+	public boolean deletePersonByFirstAndLastName(String firstName, String lastName) {
 		return pdao.deletePersonByFirstAndLastName(firstName, lastName);
 
 	}

@@ -15,14 +15,13 @@ public class MedicalRecordsService {
 
 	public List<MedicalRecords> getMedicalRecords() {
 		return mr.getMedicalRecords();
-
 	}
 
 	public MedicalRecords findMRByFirstAndLastName(String firstName, String lastName) {
 		return mr.findMRByFirstNameAndLastName(firstName, lastName);
 	}
 
-	public MedicalRecords deletePersonByFirstAndLastName(String firstName, String lastName) {
+	public boolean deleteMRByFirstAndLastName(String firstName, String lastName) {
 		return mr.deleteMRByFirstAndLastName(firstName, lastName);
 
 	}

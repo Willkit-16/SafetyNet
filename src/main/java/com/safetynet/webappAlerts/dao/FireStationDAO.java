@@ -27,12 +27,12 @@ public class FireStationDAO {
 		return null;
 	}
 
-	public FireStation deleteFSByStationAndAddress(String stationNumber, String address) {
+	public boolean deleteFSByStationAndAddress(String stationNumber, String address) {
 		for (FireStation f : Data.arrayFS) {
 			if (f.stationNumber.equals(stationNumber) && f.address.equals(address)) {
-				return null;
+				return Data.arrayFS.remove(f);
 			}
 		}
-		return null;
+		return false;
 	}
 }

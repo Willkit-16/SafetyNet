@@ -14,6 +14,10 @@ public class MedicalRecordsDAO {
 		return Data.arrayMR;
 	}
 
+	public void addMedicalRecords(MedicalRecords mr) {
+		Data.arrayMR.add(mr);
+	}
+
 	public MedicalRecords findMRByFirstNameAndLastName(String firstName, String lastName) {
 		for (MedicalRecords m : Data.arrayMR) {
 			if (m.firstName.equals(firstName) && m.lastName.equals(lastName)) {
@@ -23,12 +27,12 @@ public class MedicalRecordsDAO {
 		return null;
 	}
 
-	public MedicalRecords deleteMRByFirstAndLastName(String firstName, String lastName) {
+	public boolean deleteMRByFirstAndLastName(String firstName, String lastName) {
 		for (MedicalRecords m : Data.arrayMR) {
 			if (m.firstName.equals(firstName) && m.lastName.equals(lastName)) {
-				return null;
+				return Data.arrayMR.remove(m);
 			}
 		}
-		return null;
+		return false;
 	}
 }

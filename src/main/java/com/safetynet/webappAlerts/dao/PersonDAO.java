@@ -27,13 +27,14 @@ public class PersonDAO {
 		return null;
 	}
 
-	public Person deletePersonByFirstAndLastName(String firstName, String lastName) {
+	public boolean deletePersonByFirstAndLastName(String firstName, String lastName) {
 		for (Person p : Data.arrayPerson) {
 			if (p.firstName.equals(firstName) && p.lastName.equals(lastName)) {
-				return null;
+				return Data.arrayPerson.remove(p);
 			}
 		}
-		return null;
+		return false;
 
 	}
+
 }
