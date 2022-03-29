@@ -2,9 +2,9 @@ package com.safetynet.webappAlerts.model;
 
 public class Person {
 
-	private String firstName;
+	public String firstName;
 
-	private String lastName;
+	public String lastName;
 
 	private String personsAddress;
 

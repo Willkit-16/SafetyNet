@@ -5,9 +5,9 @@ import lombok.Data;
 @Data
 public class FireStation {
 
-	private String address;
+	public String address;
 
-	private String stationNumber;
+	public String stationNumber;
 
 	public FireStation() {
 	}
