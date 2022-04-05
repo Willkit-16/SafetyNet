@@ -14,10 +14,6 @@ public class MedicalRecordsDAO {
 		return Data.arrayMR;
 	}
 
-	public void addMedicalRecords(MedicalRecords mr) {
-		Data.arrayMR.add(mr);
-	}
-
 	public MedicalRecords findMRByFirstNameAndLastName(String firstName, String lastName) {
 		for (MedicalRecords m : Data.arrayMR) {
 			if (m.firstName.equals(firstName) && m.lastName.equals(lastName)) {
@@ -34,5 +30,23 @@ public class MedicalRecordsDAO {
 			}
 		}
 		return false;
+	}
+
+	public MedicalRecords addMedicalRecords(MedicalRecords mr) {
+		Data.arrayMR.add(mr);
+		return mr;
+	}
+
+	public MedicalRecords updateMR(String firstName, String lastName, String birthDate, String medications,
+			String allergies) {
+		for (MedicalRecords m : Data.arrayMR) {
+			if (m.firstName.equals(firstName) && m.lastName.equals(lastName)) {
+				m.setBirthDate(birthDate);
+				m.setAllergies(allergies);
+				m.setMedications(medications);
+				return m;
+			}
+		}
+		return null;
 	}
 }

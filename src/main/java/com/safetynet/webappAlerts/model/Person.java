@@ -8,7 +8,7 @@ public class Person {
 
 	private String personsAddress;
 
-	private String city;
+	public String city;
 
 	private String zip;
 

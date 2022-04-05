@@ -10,8 +10,9 @@ import com.safetynet.webappAlerts.model.FireStation;
 @Repository
 public class FireStationDAO {
 
-	public void addFireStation(FireStation fr) {
+	public FireStation addFireStation(FireStation fr) {
 		Data.arrayFS.add(fr);
+		return fr;
 	}
 
 	public List<FireStation> getFireStations() {
@@ -34,5 +35,14 @@ public class FireStationDAO {
 			}
 		}
 		return false;
+	}
+
+	public FireStation updateFireStation(String stationNumber, String address) {
+		for (FireStation f : Data.arrayFS)
+			if (f.stationNumber.equals(stationNumber) && f.address.equals(address)) {
+				f.setStationNumber(stationNumber);
+				return f;
+			}
+		return null;
 	}
 }

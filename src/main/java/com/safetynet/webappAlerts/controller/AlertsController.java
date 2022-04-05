@@ -3,12 +3,12 @@ package com.safetynet.webappAlerts.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.safetynet.webappAlerts.model.FireStation;
@@ -53,14 +53,15 @@ public class AlertsController {
 		return ps.getPersons();
 	}
 
+	/**
+	 * Adds the person.
+	 *
+	 * @param pr the pr
+	 * @return the person
+	 */
 	@PostMapping("/person")
-	public ResponseEntity<String> addPerson(String firstName, String lastName, String personAddress, String city,
-			String zip, String phone, String email) {
-		if (ps.createAndAddPerson(firstName, lastName, personAddress, city, zip, phone, email)) {
-			return new ResponseEntity<String>(HttpStatus.OK);
-		} else {
-			return new ResponseEntity<String>(HttpStatus.NOT_ACCEPTABLE);
-		}
+	public Person addPerson(@RequestBody Person pr) {
+		return ps.addPerson(pr);
 	}
 
 	/**
@@ -74,6 +75,27 @@ public class AlertsController {
 	public Person findPersonByFirstAndLastName(@PathVariable("firstName") String firstName,
 			@PathVariable("lastName") String lastName) {
 		return ps.findPersonByFirstAndLastName(firstName, lastName);
+	}
+
+	/**
+	 * Update person by name.
+	 *
+	 * @param firstName      the first name
+	 * @param lastName       the last name
+	 * @param city           the city
+	 * @param zip            the zip
+	 * @param phone          the phone
+	 * @param email          the email
+	 * @param personsAddress the persons address
+	 * @return the person
+	 */
+	@PutMapping("/person/{firstName}/{lastName}/{city}/{zip}/{phone}/{email}/{personsAddress}")
+	public Person updatePersonByName(@PathVariable("firstName") String firstName,
+			@PathVariable("lastName") String lastName, @PathVariable("city") String city,
+			@PathVariable("zip") String zip, @PathVariable("phone") String phone, @PathVariable("email") String email,
+			@PathVariable("personsAddress") String personsAddress) {
+		return ps.updatePerson(firstName, lastName, city, zip, phone, email, personsAddress);
+
 	}
 
 	/**
@@ -115,6 +137,18 @@ public class AlertsController {
 	}
 
 	/**
+	 * Adds the fire station.
+	 *
+	 * @param fr the fr
+	 * @return the fire station
+	 */
+	@PostMapping("/firestations")
+	public FireStation addFireStation(@RequestBody FireStation fr) {
+		return fs.addFireStation(fr);
+
+	}
+
+	/**
 	 * Delete FS by station number and addresse.
 	 *
 	 * @param stationNumber the station number
@@ -125,6 +159,19 @@ public class AlertsController {
 	public boolean deleteFSByStationNumberAndAddresse(@PathVariable("stationNumber") String stationNumber,
 			@PathVariable("address") String address) {
 		return fs.deleteFSByStationAndAddress(stationNumber, address);
+	}
+
+	/**
+	 * Update fire station.
+	 *
+	 * @param stationNumber the station number
+	 * @param address       the address
+	 * @return the fire station
+	 */
+	@PutMapping("/firestation/{stationNumber}/{address}")
+	public FireStation updateFireStation(@PathVariable("stationNumber") String stationNumber,
+			@PathVariable("address") String address) {
+		return fs.updateFireStation(stationNumber, address);
 	}
 
 	// Medical Records
@@ -153,6 +200,17 @@ public class AlertsController {
 	}
 
 	/**
+	 * Adds the medical records.
+	 *
+	 * @param mrs the mrs
+	 * @return the medical records
+	 */
+	@PostMapping("/medicalrecords")
+	public MedicalRecords addMedicalRecords(@RequestBody MedicalRecords mrs) {
+		return mr.addMedicalRecords(mrs);
+	}
+
+	/**
 	 * Delete MR by first and last name.
 	 *
 	 * @param firstName the first name
@@ -166,14 +224,42 @@ public class AlertsController {
 	}
 
 	/**
+	 * Update MR.
+	 *
+	 * @param firstName   the first name
+	 * @param lastName    the last name
+	 * @param birthDate   the birth date
+	 * @param medications the medications
+	 * @param allergies   the allergies
+	 * @return the medical records
+	 */
+	@PutMapping("/medicalrecords/{firstName}/{lastName}/{birthDate}/{medications}/{allergies}")
+	public MedicalRecords updateMR(@PathVariable("firstName") String firstName,
+			@PathVariable("lastName") String lastName, @PathVariable("birthDate") String birthDate,
+			@PathVariable("medications") String medications, @PathVariable("allergies") String allergies) {
+		return mr.updateMR(firstName, lastName, birthDate, medications, allergies);
+
+	}
+
+	/**
 	 * List of fs.
 	 *
 	 * @return the string
 	 */
-	@GetMapping("firestation?stationNumber=<station_number>")
+	@GetMapping("/firestation?stationNumber={station}")
 	public String listOfFs() {
 		return null;
+	}
 
+	/**
+	 * List of email.
+	 *
+	 * @param pr the pr
+	 * @return the list
+	 */
+	@GetMapping("/communityEmail?city={city}")
+	public Person listOfEmail(@PathVariable("city") String city, String email) {
+		return ps.listOfEmail(city, email);
 	}
 
 }

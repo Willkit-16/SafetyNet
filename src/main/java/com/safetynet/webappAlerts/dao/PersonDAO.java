@@ -10,8 +10,9 @@ import com.safetynet.webappAlerts.model.Person;
 @Repository
 public class PersonDAO {
 
-	public boolean addPerson(Person pr) {
-		return Data.arrayPerson.add(pr);
+	public Person addPerson(Person pr) {
+		Data.arrayPerson.add(pr);
+		return pr;
 	}
 
 	public List<Person> getPersons() {
@@ -35,6 +36,32 @@ public class PersonDAO {
 		}
 		return false;
 
+	}
+
+	public Person updatePerson(String firstName, String lastName, String personsAddress, String city, String zip,
+			String phone, String email) {
+		for (Person p : Data.arrayPerson) {
+			if (p.firstName.equals(firstName) && p.lastName.equals(lastName)) {
+				p.setAddress(personsAddress);
+				p.setCity(city);
+				p.setEmail(email);
+				p.setPhone(phone);
+				p.setZip(zip);
+
+				return p;
+			}
+		}
+		return null;
+	}
+
+	public Person listOfEmail(String city, String email) {
+		for (Person p : Data.arrayPerson) {
+			if (p.city.equals(city)) {
+				p.getEmail();
+				return p;
+			}
+		}
+		return null;
 	}
 
 }

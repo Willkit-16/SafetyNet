@@ -27,4 +27,12 @@ public class FireStationService {
 		return fdao.deleteFSByStationAndAddress(stationNumber, address);
 
 	}
+
+	public FireStation addFireStation(FireStation fr) {
+		return fdao.addFireStation(fr);
+	}
+
+	public FireStation updateFireStation(String stationNumber, String address) {
+		return fdao.updateFireStation(stationNumber, address);
+	}
 }

@@ -11,19 +11,28 @@ import com.safetynet.webappAlerts.model.MedicalRecords;
 @Service
 public class MedicalRecordsService {
 	@Autowired
-	MedicalRecordsDAO mr;
+	MedicalRecordsDAO mrdao;
 
 	public List<MedicalRecords> getMedicalRecords() {
-		return mr.getMedicalRecords();
+		return mrdao.getMedicalRecords();
 	}
 
 	public MedicalRecords findMRByFirstAndLastName(String firstName, String lastName) {
-		return mr.findMRByFirstNameAndLastName(firstName, lastName);
+		return mrdao.findMRByFirstNameAndLastName(firstName, lastName);
 	}
 
 	public boolean deleteMRByFirstAndLastName(String firstName, String lastName) {
-		return mr.deleteMRByFirstAndLastName(firstName, lastName);
+		return mrdao.deleteMRByFirstAndLastName(firstName, lastName);
 
+	}
+
+	public MedicalRecords addMedicalRecords(MedicalRecords mr) {
+		return mrdao.addMedicalRecords(mr);
+	}
+
+	public MedicalRecords updateMR(String firstName, String lastName, String birthDate, String medications,
+			String allergies) {
+		return mrdao.updateMR(firstName, lastName, birthDate, medications, allergies);
 	}
 
 }

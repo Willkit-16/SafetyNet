@@ -6,11 +6,11 @@ public class MedicalRecords {
 
 	public String lastName;
 
-	private String birthDate;
+	public String birthDate;
 
-	private String medications;
+	public String medications;
 
-	private String allergies;
+	public String allergies;
 
 	public MedicalRecords() {
 	}
@@ -38,6 +38,10 @@ public class MedicalRecords {
 
 	public String getBirthDate() {
 		return birthDate;
+	}
+
+	public void setBirthDate(String birthDate) {
+		this.birthDate = birthDate;
 	}
 
 	public String getMedications() {

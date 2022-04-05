@@ -18,9 +18,7 @@ public class PersonService {
 		return pdao.getPersons();
 	}
 
-	public boolean createAndAddPerson(String firstName, String lastName, String personAddress, String city, String zip,
-			String phone, String email) {
-		Person pr = new Person(firstName, lastName, personAddress, city, zip, phone, email);
+	public Person addPerson(Person pr) {
 		return pdao.addPerson(pr);
 	}
 
@@ -31,6 +29,15 @@ public class PersonService {
 	public boolean deletePersonByFirstAndLastName(String firstName, String lastName) {
 		return pdao.deletePersonByFirstAndLastName(firstName, lastName);
 
+	}
+
+	public Person updatePerson(String firstName, String lastName, String personsAddress, String city, String zip,
+			String phone, String email) {
+		return pdao.updatePerson(firstName, lastName, personsAddress, city, zip, phone, email);
+	}
+
+	public Person listOfEmail(String city, String email) {
+		return pdao.listOfEmail(city, email);
 	}
 
 }
