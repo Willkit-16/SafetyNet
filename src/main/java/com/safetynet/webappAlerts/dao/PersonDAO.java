@@ -28,6 +28,15 @@ public class PersonDAO {
 		return null;
 	}
 
+	public Person findPersonByAddress(String personsAddress) {
+		for (Person p : Data.arrayPerson) {
+			if (p.personsAddress.equals(personsAddress)) {
+				return p;
+			}
+		}
+		return null;
+	}
+
 	public boolean deletePersonByFirstAndLastName(String firstName, String lastName) {
 		for (Person p : Data.arrayPerson) {
 			if (p.firstName.equals(firstName) && p.lastName.equals(lastName)) {
@@ -54,11 +63,10 @@ public class PersonDAO {
 		return null;
 	}
 
-	public Person listOfEmail(String city, String email) {
+	public String listOfEmail(String city) {
 		for (Person p : Data.arrayPerson) {
 			if (p.city.equals(city)) {
-				p.getEmail();
-				return p;
+				return p.getEmail();
 			}
 		}
 		return null;

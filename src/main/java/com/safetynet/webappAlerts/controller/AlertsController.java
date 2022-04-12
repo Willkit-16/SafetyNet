@@ -1,14 +1,18 @@
 package com.safetynet.webappAlerts.controller;
 
 import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.safetynet.webappAlerts.model.FireStation;
@@ -40,6 +44,8 @@ public class AlertsController {
 	/** The mr. */
 	@Autowired
 	MedicalRecordsService mr;
+
+	Logger log = Logger.getLogger("AlertsController");
 
 	// Person
 
@@ -134,6 +140,11 @@ public class AlertsController {
 	public FireStation findFSByStationNumberAndAddress(@PathVariable("stationNumber") String stationNumber,
 			@PathVariable("address") String address) {
 		return fs.findFSByStationAndAddress(stationNumber, address);
+	}
+
+	@GetMapping("/firestation/{stationNumber}")
+	public FireStation findFSByNumber(@PathVariable("stationNumber") String stationNumber) {
+		return fs.findFSByNumber(stationNumber);
 	}
 
 	/**
@@ -257,9 +268,15 @@ public class AlertsController {
 	 * @param pr the pr
 	 * @return the list
 	 */
-	@GetMapping("/communityEmail?city={city}")
-	public Person listOfEmail(@PathVariable("city") String city, String email) {
-		return ps.listOfEmail(city, email);
+	@GetMapping("/communityEmail")
+	public ResponseEntity<List<String>> listOfEmail(@RequestParam(value = "city") String city) {
+		log.info("GET /communityEmail/?city=" + city);
+		try {
+			return ResponseEntity.ok(ps.listOfEmail(city));
+		} catch (NoSuchElementException e) {
+			log.info("GET /communityEmail/?city=" + city + " - ERROR : " + e.getMessage());
+			return ResponseEntity.notFound().build();
+		}
 	}
 
 }

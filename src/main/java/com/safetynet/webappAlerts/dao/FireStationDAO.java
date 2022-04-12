@@ -28,6 +28,15 @@ public class FireStationDAO {
 		return null;
 	}
 
+	public FireStation findFSByNumber(String stationNumber) {
+		for (FireStation f : Data.arrayFS) {
+			if (f.stationNumber.equals(stationNumber)) {
+				return f;
+			}
+		}
+		return null;
+	}
+
 	public boolean deleteFSByStationAndAddress(String stationNumber, String address) {
 		for (FireStation f : Data.arrayFS) {
 			if (f.stationNumber.equals(stationNumber) && f.address.equals(address)) {
@@ -45,4 +54,6 @@ public class FireStationDAO {
 			}
 		return null;
 	}
+
+	// Methode liste d'addresse correspondant à la firestation qui retourne.
 }

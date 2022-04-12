@@ -6,7 +6,7 @@ public class Person {
 
 	public String lastName;
 
-	private String personsAddress;
+	public String personsAddress;
 
 	public String city;
 
@@ -14,7 +14,7 @@ public class Person {
 
 	private String phone;
 
-	private String email;
+	public String email;
 
 	public Person() {
 	}

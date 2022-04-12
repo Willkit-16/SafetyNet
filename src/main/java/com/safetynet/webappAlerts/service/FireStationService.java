@@ -23,6 +23,10 @@ public class FireStationService {
 		return fdao.findFSByStationAndAddress(stationNumber, address);
 	}
 
+	public FireStation findFSByNumber(String stationNumber) {
+		return fdao.findFSByNumber(stationNumber);
+	}
+
 	public boolean deleteFSByStationAndAddress(String stationNumber, String address) {
 		return fdao.deleteFSByStationAndAddress(stationNumber, address);
 
