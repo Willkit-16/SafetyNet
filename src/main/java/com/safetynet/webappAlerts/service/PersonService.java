@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.safetynet.webappAlerts.dao.FireStationDAO;
 import com.safetynet.webappAlerts.dao.PersonDAO;
+import com.safetynet.webappAlerts.model.FireStation;
 import com.safetynet.webappAlerts.model.Person;
 
 @Service
@@ -18,6 +19,9 @@ public class PersonService {
 
 	@Autowired
 	FireStationDAO fsdao;
+
+	@Autowired
+	FireStationService fss;
 
 	public List<Person> getPersons() {
 		return pdao.getPersons();
@@ -56,15 +60,22 @@ public class PersonService {
 		return listEmail;
 	}
 
-	public List<String> listOfPhone(String stationNumber) {
-		List <String> listPhone = new ArrayList<String>();
-		List <String> listAddress = new ArrayList<String>();
-		
-		listAddress = fsdao.findFSByNumber(stationNumber).getAddress();
-		
-		for (Person p : pdao.getPersons()) {
-			if (p.getAddress().) //On fait une boucle for each sur listAddress puis tester p.getAddress = élément de la boucle for each listAddress, si oui add phone à la listePhone.Puis retourne listPhone après les deux boucles.
+	public List<String> listOfPhone(String station) {
+		List<String> listPhone = new ArrayList<String>();
+		List<String> listAddressByNumber = new ArrayList<String>();
+
+		for (FireStation f : fsdao.getFireStations()) {
+			if (f.getStation().equals(station)) {
+				listAddressByNumber = fss.findFSByNumber(station);
+				for (Person p : pdao.getPersons()) {
+					if (p.getAddress().contains((CharSequence) listAddressByNumber)) {
+						listPhone.add(p.getPhone());
+					}
+				}
+			}
 		}
+		return listPhone;
+
 	}
 
 }

@@ -63,13 +63,4 @@ public class PersonDAO {
 		return null;
 	}
 
-	public String listOfEmail(String city) {
-		for (Person p : Data.arrayPerson) {
-			if (p.city.equals(city)) {
-				return p.getEmail();
-			}
-		}
-		return null;
-	}
-
 }

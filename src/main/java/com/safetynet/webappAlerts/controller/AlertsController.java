@@ -136,15 +136,15 @@ public class AlertsController {
 	 * @param address       the address
 	 * @return the fire station
 	 */
-	@GetMapping("/firestation/{stationNumber}/{address}")
-	public FireStation findFSByStationNumberAndAddress(@PathVariable("stationNumber") String stationNumber,
+	@GetMapping("/firestation/{station}/{address}")
+	public FireStation findFSByStationNumberAndAddress(@PathVariable("station") String station,
 			@PathVariable("address") String address) {
-		return fs.findFSByStationAndAddress(stationNumber, address);
+		return fs.findFSByStationAndAddress(station, address);
 	}
 
-	@GetMapping("/firestation/{stationNumber}")
-	public FireStation findFSByNumber(@PathVariable("stationNumber") String stationNumber) {
-		return fs.findFSByNumber(stationNumber);
+	@GetMapping("/firestation/{station}")
+	public List<String> findFSByNumber(@PathVariable("station") String station) {
+		return fs.findFSByNumber(station);
 	}
 
 	/**
@@ -166,10 +166,10 @@ public class AlertsController {
 	 * @param address       the address
 	 * @return true, if successful
 	 */
-	@DeleteMapping("/firestation/{stationNumber}/{address}")
-	public boolean deleteFSByStationNumberAndAddresse(@PathVariable("stationNumber") String stationNumber,
+	@DeleteMapping("/firestation/{station}/{address}")
+	public boolean deleteFSByStationNumberAndAddresse(@PathVariable("station") String station,
 			@PathVariable("address") String address) {
-		return fs.deleteFSByStationAndAddress(stationNumber, address);
+		return fs.deleteFSByStationAndAddress(station, address);
 	}
 
 	/**
@@ -179,10 +179,10 @@ public class AlertsController {
 	 * @param address       the address
 	 * @return the fire station
 	 */
-	@PutMapping("/firestation/{stationNumber}/{address}")
-	public FireStation updateFireStation(@PathVariable("stationNumber") String stationNumber,
+	@PutMapping("/firestation/{station}/{address}")
+	public FireStation updateFireStation(@PathVariable("station") String station,
 			@PathVariable("address") String address) {
-		return fs.updateFireStation(stationNumber, address);
+		return fs.updateFireStation(station, address);
 	}
 
 	// Medical Records
@@ -277,6 +277,22 @@ public class AlertsController {
 			log.info("GET /communityEmail/?city=" + city + " - ERROR : " + e.getMessage());
 			return ResponseEntity.notFound().build();
 		}
+	}
+
+	@GetMapping("/phoneAlert")
+	public ResponseEntity<List<String>> listOfPhone(@RequestParam(value = "station") String station) {
+		log.info("GET /phoneAlert/?firestation=" + station);
+		try {
+			return ResponseEntity.ok(ps.listOfPhone(station));
+		} catch (NoSuchElementException e) {
+			log.info("GET /phoneAlert/?firestation=" + station + " - ERROR : " + e.getMessage());
+			return ResponseEntity.notFound().build();
+		}
+	}
+
+	@GetMapping("/phoneA/?firestation={station}")
+	public List<String> listOhPhone(@PathVariable("station") String station) {
+		return ps.listOfPhone(station);
 	}
 
 }

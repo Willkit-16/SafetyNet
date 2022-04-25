@@ -1,5 +1,6 @@
 package com.safetynet.webappAlerts.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,16 +20,22 @@ public class FireStationService {
 
 	}
 
-	public FireStation findFSByStationAndAddress(String stationNumber, String address) {
-		return fdao.findFSByStationAndAddress(stationNumber, address);
+	public FireStation findFSByStationAndAddress(String station, String address) {
+		return fdao.findFSByStationAndAddress(station, address);
 	}
 
-	public FireStation findFSByNumber(String stationNumber) {
-		return fdao.findFSByNumber(stationNumber);
+	public List<String> findFSByNumber(String station) {
+		List<String> listAddress = new ArrayList<String>();
+		for (FireStation f : fdao.getFireStations()) {
+			if (f.getStation().equals(station)) {
+				listAddress.add(f.getAddress());
+			}
+		}
+		return listAddress;
 	}
 
-	public boolean deleteFSByStationAndAddress(String stationNumber, String address) {
-		return fdao.deleteFSByStationAndAddress(stationNumber, address);
+	public boolean deleteFSByStationAndAddress(String station, String address) {
+		return fdao.deleteFSByStationAndAddress(station, address);
 
 	}
 
@@ -36,7 +43,8 @@ public class FireStationService {
 		return fdao.addFireStation(fr);
 	}
 
-	public FireStation updateFireStation(String stationNumber, String address) {
-		return fdao.updateFireStation(stationNumber, address);
+	public FireStation updateFireStation(String station, String address) {
+		return fdao.updateFireStation(station, address);
 	}
+
 }

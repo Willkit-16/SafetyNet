@@ -49,8 +49,7 @@ public class AlertsReader {
 			}
 			while (iteratorFireStations.hasNext()) {
 				JSONObject jFS = iteratorFireStations.next();
-				FireStation fireS = new FireStation(jFS.get("address").toString(), jFS.get("station").toString(),
-						listOfFirestation);
+				FireStation fireS = new FireStation(jFS.get("address").toString(), jFS.get("station").toString());
 				Data.arrayFS.add(fireS);
 			}
 			while (iteratorMedicalRecords.hasNext()) {

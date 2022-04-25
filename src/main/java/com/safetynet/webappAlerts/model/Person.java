@@ -10,9 +10,9 @@ public class Person {
 
 	public String city;
 
-	private String zip;
+	public String zip;
 
-	private String phone;
+	public String phone;
 
 	public String email;
 

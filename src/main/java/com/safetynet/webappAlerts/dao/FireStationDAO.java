@@ -19,41 +19,31 @@ public class FireStationDAO {
 		return Data.arrayFS;
 	}
 
-	public FireStation findFSByStationAndAddress(String stationNumber, String address) {
+	public FireStation findFSByStationAndAddress(String station, String address) {
 		for (FireStation f : Data.arrayFS) {
-			if (f.stationNumber.equals(stationNumber) && f.address.equals(address)) {
+			if (f.station.equals(station) && f.address.equals(address)) {
 				return f;
 			}
 		}
 		return null;
 	}
 
-	public FireStation findFSByNumber(String stationNumber) {
+	public boolean deleteFSByStationAndAddress(String station, String address) {
 		for (FireStation f : Data.arrayFS) {
-			if (f.stationNumber.equals(stationNumber)) {
-				return f;
-			}
-		}
-		return null;
-	}
-
-	public boolean deleteFSByStationAndAddress(String stationNumber, String address) {
-		for (FireStation f : Data.arrayFS) {
-			if (f.stationNumber.equals(stationNumber) && f.address.equals(address)) {
+			if (f.station.equals(station) && f.address.equals(address)) {
 				return Data.arrayFS.remove(f);
 			}
 		}
 		return false;
 	}
 
-	public FireStation updateFireStation(String stationNumber, String address) {
+	public FireStation updateFireStation(String station, String address) {
 		for (FireStation f : Data.arrayFS)
-			if (f.stationNumber.equals(stationNumber) && f.address.equals(address)) {
-				f.setStationNumber(stationNumber);
+			if (f.station.equals(station) && f.address.equals(address)) {
+				f.setStation(station);
 				return f;
 			}
 		return null;
 	}
 
-	// Methode liste d'addresse correspondant à la firestation qui retourne.
 }
