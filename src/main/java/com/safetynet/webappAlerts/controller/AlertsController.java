@@ -1,5 +1,6 @@
 package com.safetynet.webappAlerts.controller;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.logging.Logger;
@@ -15,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.safetynet.webappAlerts.dto.ChildAlertListDTO;
+import com.safetynet.webappAlerts.dto.PeopleByStationNumberListDTO;
 import com.safetynet.webappAlerts.model.FireStation;
 import com.safetynet.webappAlerts.model.MedicalRecords;
 import com.safetynet.webappAlerts.model.Person;
@@ -246,20 +249,10 @@ public class AlertsController {
 	 */
 	@PutMapping("/medicalrecords/{firstName}/{lastName}/{birthDate}/{medications}/{allergies}")
 	public MedicalRecords updateMR(@PathVariable("firstName") String firstName,
-			@PathVariable("lastName") String lastName, @PathVariable("birthDate") String birthDate,
+			@PathVariable("lastName") String lastName, @PathVariable("birthDate") LocalDate birthDate,
 			@PathVariable("medications") String medications, @PathVariable("allergies") String allergies) {
 		return mr.updateMR(firstName, lastName, birthDate, medications, allergies);
 
-	}
-
-	/**
-	 * List of fs.
-	 *
-	 * @return the string
-	 */
-	@GetMapping("/firestation?stationNumber={station}")
-	public String listOfFs() {
-		return null;
 	}
 
 	/**
@@ -280,7 +273,7 @@ public class AlertsController {
 	}
 
 	@GetMapping("/phoneAlert")
-	public ResponseEntity<List<String>> listOfPhone(@RequestParam(value = "station") String station) {
+	public ResponseEntity<List<String>> listOfPhone(@RequestParam(value = "firestation") String station) {
 		log.info("GET /phoneAlert/?firestation=" + station);
 		try {
 			return ResponseEntity.ok(ps.listOfPhone(station));
@@ -290,9 +283,27 @@ public class AlertsController {
 		}
 	}
 
-	@GetMapping("/phoneA/?firestation={station}")
-	public List<String> listOhPhone(@PathVariable("station") String station) {
-		return ps.listOfPhone(station);
+	@GetMapping("/firestation")
+	public ResponseEntity<PeopleByStationNumberListDTO> listOfPersonByStation(
+			@RequestParam(value = "stationNumber") String station) {
+		log.info("GET /firestation/?stationNumber=" + station);
+		try {
+			return ResponseEntity.ok(ps.listOfPeople(station));
+		} catch (NoSuchElementException e) {
+			log.info("GET /firestation/?stationNumber=" + station + " - ERROR : " + e.getMessage());
+			return ResponseEntity.notFound().build();
+		}
 	}
 
+	@GetMapping("/childAlert")
+	public ResponseEntity<ChildAlertListDTO> listOfChildren(@RequestParam(value = "address") String personsAddress) {
+		log.info("GET /childAlert/?address=" + personsAddress);
+		try {
+			return ResponseEntity.ok(mr.listOfChildren(personsAddress));
+		} catch (NoSuchElementException e) {
+			log.info("GET /childAlert/?address=" + personsAddress + "- ERROR : " + e.getMessage());
+			return ResponseEntity.notFound().build();
+		}
+
+	}
 }

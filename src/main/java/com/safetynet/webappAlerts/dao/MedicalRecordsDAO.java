@@ -1,5 +1,6 @@
 package com.safetynet.webappAlerts.dao;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.stereotype.Repository;
@@ -37,7 +38,7 @@ public class MedicalRecordsDAO {
 		return mr;
 	}
 
-	public MedicalRecords updateMR(String firstName, String lastName, String birthDate, String medications,
+	public MedicalRecords updateMR(String firstName, String lastName, LocalDate birthDate, String medications,
 			String allergies) {
 		for (MedicalRecords m : Data.arrayMR) {
 			if (m.firstName.equals(firstName) && m.lastName.equals(lastName)) {

@@ -3,6 +3,8 @@ package com.safetynet.webappAlerts.controller;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Iterator;
 
 import org.json.simple.JSONArray;
@@ -54,9 +56,11 @@ public class AlertsReader {
 			}
 			while (iteratorMedicalRecords.hasNext()) {
 				JSONObject jMR = iteratorMedicalRecords.next();
+				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+				LocalDate date = LocalDate.parse(jMR.get("birthdate").toString(), formatter);
 				MedicalRecords medicalR = new MedicalRecords(jMR.get("firstName").toString(),
-						jMR.get("lastName").toString(), jMR.get("birthdate").toString(),
-						jMR.get("medications").toString(), jMR.get("allergies").toString());
+						jMR.get("lastName").toString(), date, jMR.get("medications").toString(),
+						jMR.get("allergies").toString());
 				Data.arrayMR.add(medicalR);
 			}
 

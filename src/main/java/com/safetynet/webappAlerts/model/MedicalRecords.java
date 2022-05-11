@@ -1,12 +1,14 @@
 package com.safetynet.webappAlerts.model;
 
+import java.time.LocalDate;
+
 public class MedicalRecords {
 
 	public String firstName;
 
 	public String lastName;
 
-	public String birthDate;
+	public LocalDate birthDate;
 
 	public String medications;
 
@@ -15,7 +17,8 @@ public class MedicalRecords {
 	public MedicalRecords() {
 	}
 
-	public MedicalRecords(String firstName, String lastName, String birthDate, String medications, String allergies) {
+	public MedicalRecords(String firstName, String lastName, LocalDate birthDate, String medications,
+			String allergies) {
 
 		this.firstName = firstName;
 
@@ -36,11 +39,11 @@ public class MedicalRecords {
 		return lastName;
 	}
 
-	public String getBirthDate() {
+	public LocalDate getBirthDate() {
 		return birthDate;
 	}
 
-	public void setBirthDate(String birthDate) {
+	public void setBirthDate(LocalDate birthDate) {
 		this.birthDate = birthDate;
 	}
 
