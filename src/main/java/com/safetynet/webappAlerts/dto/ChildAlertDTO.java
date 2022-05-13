@@ -1,33 +1,25 @@
 package com.safetynet.webappAlerts.dto;
 
+import lombok.Data;
+
+@Data
 public class ChildAlertDTO {
 
 	String firstName;
 	String lastName;
 	Long age;
 
-	public Long getBirthDate() {
-		return age;
+	public ChildAlertDTO() {
+
 	}
 
-	public void setBirthDate(Long birthDate) {
-		this.age = birthDate;
-	}
+	public ChildAlertDTO(String firstName, String lastName, Long age) {
 
-	public String getFirstName() {
-		return firstName;
-	}
-
-	public void setFirstName(String firstName) {
 		this.firstName = firstName;
-	}
 
-	public String getLastName() {
-		return lastName;
-	}
-
-	public void setLastName(String lastName) {
 		this.lastName = lastName;
+
+		this.age = age;
 	}
 
 	@Override

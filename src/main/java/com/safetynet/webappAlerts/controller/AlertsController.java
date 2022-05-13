@@ -17,7 +17,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.safetynet.webappAlerts.dto.ChildAlertListDTO;
+import com.safetynet.webappAlerts.dto.FireListDTO;
+import com.safetynet.webappAlerts.dto.FloodListDTO;
 import com.safetynet.webappAlerts.dto.PeopleByStationNumberListDTO;
+import com.safetynet.webappAlerts.dto.PersonInfoListDTO;
 import com.safetynet.webappAlerts.model.FireStation;
 import com.safetynet.webappAlerts.model.MedicalRecords;
 import com.safetynet.webappAlerts.model.Person;
@@ -143,6 +146,11 @@ public class AlertsController {
 	public FireStation findFSByStationNumberAndAddress(@PathVariable("station") String station,
 			@PathVariable("address") String address) {
 		return fs.findFSByStationAndAddress(station, address);
+	}
+
+	@GetMapping("/person/{address}")
+	public List<String> findPrByAddress(@PathVariable("address") String personsAddress) {
+		return ps.findPrByAddress(personsAddress);
 	}
 
 	@GetMapping("/firestation/{station}")
@@ -305,5 +313,40 @@ public class AlertsController {
 			return ResponseEntity.notFound().build();
 		}
 
+	}
+
+	@GetMapping("/fire")
+	public ResponseEntity<FireListDTO> listByAddress(@RequestParam(value = "address") String personsAddress) {
+		log.info("GET /fire/?address=" + personsAddress);
+		try {
+			return ResponseEntity.ok(mr.listByAddress(personsAddress));
+		} catch (NoSuchElementException e) {
+			log.info("GET /fire/?address=" + personsAddress + "- ERROR : " + e.getMessage());
+			return ResponseEntity.notFound().build();
+		}
+	}
+
+	@GetMapping("/flood/stations")
+	public ResponseEntity<FloodListDTO> familyByStation(@RequestParam(value = "stations") String station) {
+		log.info("GET /flood/stations/?stations=" + station);
+		try {
+			return ResponseEntity.ok(mr.familyByStation(station));
+		} catch (NoSuchElementException e) {
+			log.info("GET /fire/?address=" + station + "- ERROR : " + e.getMessage());
+			return ResponseEntity.notFound().build();
+		}
+	}
+
+	@GetMapping("/personInfo")
+	public ResponseEntity<PersonInfoListDTO> personInfo(
+			@RequestParam(value = "firstName" + "lastName") String firstName, String lastName) {
+		log.info("GET /personInfo?firstName=" + firstName + "lastName=" + lastName);
+
+		try {
+			return ResponseEntity.ok(mr.personInfo(firstName, lastName));
+		} catch (NoSuchElementException e) {
+			log.info("GET /personInfo?firstName=" + firstName + lastName + "- ERROR :" + e.getMessage());
+			return ResponseEntity.notFound().build();
+		}
 	}
 }
