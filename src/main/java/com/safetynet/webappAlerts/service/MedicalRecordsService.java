@@ -15,7 +15,6 @@ import com.safetynet.webappAlerts.dto.ChildAlertDTO;
 import com.safetynet.webappAlerts.dto.ChildAlertListDTO;
 import com.safetynet.webappAlerts.dto.FireDTO;
 import com.safetynet.webappAlerts.dto.FireListDTO;
-import com.safetynet.webappAlerts.dto.FloodDTO;
 import com.safetynet.webappAlerts.dto.FloodListDTO;
 import com.safetynet.webappAlerts.dto.PersonInfoListDTO;
 import com.safetynet.webappAlerts.model.FireStation;
@@ -62,30 +61,34 @@ public class MedicalRecordsService {
 		long age = 0;
 		ChildAlertListDTO cal = new ChildAlertListDTO();
 
+		// Recherche sur chq addresse, si personne mm addrr = dans list temporaire
 		for (Person p : pdao.getPersons()) {
 			if (p.getAddress().equals(personsAddress)) {
-				listOfChildrenByAddress = ps.findPrByAddress(personsAddress);
+				listOfChildrenByAddress = ps.findPrByAd(personsAddress);
 			}
 
+			// ici chercher age et ajouter ds 2eme liste temporaire pr les - de18ans
 			for (MedicalRecords m : mrdao.getMedicalRecords()) {
-				if (listOfChildrenByAddress.contains(m.getFirstName())) {
+				if (listOfChildrenByAddress.contains(m.getLastName())) {
 					LocalDate dEnd = LocalDate.now();
 					age = ChronoUnit.YEARS.between(m.getBirthDate(), dEnd);
-					ChildAlertDTO ca = new ChildAlertDTO();
-
 					if (age <= 18) {
-						ca.setFirstName(m.getFirstName());
-						ca.setLastName(m.getLastName());
-						ca.setAge(age);
-						cal.getListOfChildren().add(ca);
-					} else {
-						return null;
+						if (m.getFirstName().equals(p.getFirstName()) && m.getLastName().equals(p.getLastName())) {
+							ChildAlertDTO ca = new ChildAlertDTO();
+							ca.setFirstName(m.getFirstName());
+							ca.setLastName(m.getLastName());
+							ca.setAge(age);
+							cal.getListOfChildren().add(ca);
+							cal.setFoyer(listOfChildrenByAddress);
+						}
 					}
-
 				}
-
 			}
 		}
+
+		// ajouter ds list dto ici ajout 18ans - et ttes les autres personnes y habitant
+		// avec
+
 		return cal;
 
 	}
@@ -94,54 +97,42 @@ public class MedicalRecordsService {
 		List<String> listOfPersonByAddress = new ArrayList<String>();
 		long age = 0;
 		FireListDTO fl = new FireListDTO();
-		FireDTO fdto = new FireDTO();
 
 		for (Person p : pdao.getPersons()) {
 			if (p.getAddress().equals(personsAddress)) {
-				listOfPersonByAddress.add(p.getFirstName());
-				listOfPersonByAddress.add(p.getLastName());
-				listOfPersonByAddress.add(p.getPhone());
+				listOfPersonByAddress = ps.findPrByAd(personsAddress);
+			}
 
-				fdto.setPhone(p.getPhone());
+			for (MedicalRecords m : mrdao.getMedicalRecords()) {
+				if (listOfPersonByAddress.contains(m.getLastName())) {
+					LocalDate dEnd = LocalDate.now();
+					age = ChronoUnit.YEARS.between(m.getBirthDate(), dEnd);
 
+					if (m.getFirstName().equals(p.getFirstName()) && m.getLastName().equals(p.getLastName())) {
+						FireDTO fd = new FireDTO();
+						fd.setFirstName(m.getFirstName());
+						fd.setLastName(m.getLastName());
+						fd.setAge(age);
+						fd.setMedications(m.getMedications());
+						fd.setAllergies(m.getAllergies());
+						fd.setPhone(p.getPhone());
+						fl.getListOfPersonByAddress().add(fd);
+					}
+				}
+				for (FireStation f : fdao.getFireStations()) {
+					if (personsAddress.equals(f.getAddress())) {
+						fl.setStationNumber(f.getStation());
+					}
+				}
 			}
 		}
 
-		for (FireStation f : fdao.getFireStations()) {
-			if (f.getAddress().equals(personsAddress)) {
-				listOfPersonByAddress.add(f.getAddress());
-
-				fdto.setStation(f.getStation());
-
-			}
-		}
-
-		for (MedicalRecords m : mrdao.getMedicalRecords()) {
-			if (listOfPersonByAddress.contains(m.getLastName())) {
-				LocalDate dEnd = LocalDate.now();
-				age = ChronoUnit.YEARS.between(m.getBirthDate(), dEnd);
-				listOfPersonByAddress.add(m.getAllergies());
-				listOfPersonByAddress.add(m.getMedications());
-
-				fdto.setFirstName(m.getFirstName());
-				fdto.setLastName(m.getLastName());
-				fdto.setAge(age);
-				fdto.setMedications(m.getMedications());
-				fdto.setAllergies(m.getAllergies());
-
-				fl.getListOfPersonByAddress().add(fdto);
-			}
-
-			return fl;
-		}
-
-		return null;
+		return fl;
 	}
 
 	public FloodListDTO familyByStation(String station) {
 		List<String> listAddressByNumber = new ArrayList<String>();
 		FloodListDTO fldto = new FloodListDTO();
-		FloodDTO fdto = new FloodDTO();
 		long age = 0;
 		for (FireStation f : fdao.getFireStations()) {
 			if (f.getStation().equals(station)) {
@@ -149,25 +140,6 @@ public class MedicalRecordsService {
 			}
 		}
 
-		for (MedicalRecords m : mrdao.getMedicalRecords()) {
-			if (listAddressByNumber.contains(m.getFirstName())) {
-
-				LocalDate dEnd = LocalDate.now();
-				age = ChronoUnit.YEARS.between(m.getBirthDate(), dEnd);
-				fdto.setFirstName(m.getFirstName());
-				fdto.setLastName(m.getLastName());
-				fdto.setAge(age);
-				fdto.setMedications(m.getMedications());
-				fdto.setAllergies(m.getAllergies());
-			}
-			for (Person p : pdao.getPersons()) {
-				if (listAddressByNumber.contains(p.getFirstName())) {
-					fdto.setPhone(p.getPhone());
-					fldto.getFamilyByStation().add(fdto);
-				}
-			}
-
-		}
 		return fldto;
 	}
 

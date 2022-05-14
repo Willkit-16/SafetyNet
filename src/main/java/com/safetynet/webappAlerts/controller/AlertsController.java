@@ -148,11 +148,6 @@ public class AlertsController {
 		return fs.findFSByStationAndAddress(station, address);
 	}
 
-	@GetMapping("/person/{address}")
-	public List<String> findPrByAddress(@PathVariable("address") String personsAddress) {
-		return ps.findPrByAddress(personsAddress);
-	}
-
 	@GetMapping("/firestation/{station}")
 	public List<String> findFSByNumber(@PathVariable("station") String station) {
 		return fs.findFSByNumber(station);

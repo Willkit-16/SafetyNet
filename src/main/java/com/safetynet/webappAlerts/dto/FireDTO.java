@@ -7,7 +7,6 @@ public class FireDTO {
 	Long age;
 	String medications;
 	String allergies;
-	String station;
 	String phone;
 
 	public String getFirstName() {
@@ -50,14 +49,6 @@ public class FireDTO {
 		this.allergies = allergies;
 	}
 
-	public String getStation() {
-		return station;
-	}
-
-	public void setStation(String station) {
-		this.station = station;
-	}
-
 	public String getPhone() {
 		return phone;
 	}
@@ -69,7 +60,7 @@ public class FireDTO {
 	@Override
 	public String toString() {
 		return "People by address {" + firstName + "," + lastName + "," + age + "," + medications + "," + allergies
-				+ "," + station + "," + phone + '}';
+				+ "," + phone + '}';
 	}
 
 }

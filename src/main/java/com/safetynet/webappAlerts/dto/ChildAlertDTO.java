@@ -20,6 +20,7 @@ public class ChildAlertDTO {
 		this.lastName = lastName;
 
 		this.age = age;
+
 	}
 
 	@Override

@@ -54,14 +54,16 @@ public class PersonService {
 		return pdao.updatePerson(firstName, lastName, personsAddress, city, zip, phone, email);
 	}
 
-	public List<String> findPrByAddress(String personsAddress) {
-		List<String> listPrAddress = new ArrayList<String>();
+	public List<String> findPrByAd(String personsAddress) {
+
+		List<String> prByAd = new ArrayList<String>();
 		for (Person p : pdao.getPersons()) {
 			if (p.getAddress().equals(personsAddress)) {
-				listPrAddress.add(p.getFirstName());
+				prByAd.add(p.getFirstName());
+				prByAd.add(p.getLastName());
 			}
 		}
-		return listPrAddress;
+		return prByAd;
 	}
 
 	public List<String> listOfEmail(String city) {
