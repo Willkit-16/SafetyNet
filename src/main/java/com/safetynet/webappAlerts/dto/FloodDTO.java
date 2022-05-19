@@ -7,6 +7,15 @@ public class FloodDTO {
 	Long age;
 	String medications;
 	String allergies;
+	String address;
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
 
 	public String getFirstName() {
 		return firstName;
@@ -59,6 +68,6 @@ public class FloodDTO {
 	@Override
 	public String toString() {
 		return "Flood DTO{" + firstName + "," + lastName + "," + phone + "," + age + "," + medications + "," + allergies
-				+ '}';
+				+ "," + address + '}';
 	}
 }
