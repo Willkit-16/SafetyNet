@@ -26,7 +26,7 @@ public class AlertsReaderTest {
 		JSONParser parser = new JSONParser();
 
 		try {
-			Object obj = parser.parse(new FileReader("src/main/resources/data.json"));
+			Object obj = parser.parse(new FileReader("src/test/resources/datatest.json"));
 
 			JSONObject jsonObject = (JSONObject) obj;
 

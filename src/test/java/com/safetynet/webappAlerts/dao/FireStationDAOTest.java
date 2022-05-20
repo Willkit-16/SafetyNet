@@ -1,9 +1,11 @@
 package com.safetynet.webappAlerts.dao;
 
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
@@ -26,13 +28,26 @@ public class FireStationDAOTest {
 	@BeforeAll
 	private static void setUp() {
 		fdao = new FireStationDAO();
+
 	}
 
-	@SuppressWarnings("unlikely-arg-type")
+	@BeforeEach
+	public void setFireStation() {
+		ar = new AlertsReaderTest();
+		data = new Data();
+		FireStation fs = new FireStation("4500 Culver", "4");
+		FireStation fsB = new FireStation("1509 Culver St", "3");
+
+		Data.arrayFS.add(fs);
+		Data.arrayFS.add(fsB);
+
+		fdao.updateFireStation("3", "1509 Culver St");
+	}
+
 	@Test
 	public void addFSTest() {
-		FireStation fs = new FireStation("4500 Culver", "4");
-		equals(fdao.addFireStation(fs));
+		FireStation fs = new FireStation("7000 Culver", "4");
+		assertNotNull(fdao.addFireStation(fs));
 	}
 
 	@Test
@@ -40,21 +55,18 @@ public class FireStationDAOTest {
 		assertNull(fdao.updateFireStation("2", null));
 	}
 
-	@SuppressWarnings("unlikely-arg-type")
 	@Test
 	public void updateFS() {
-		equals(fdao.updateFireStation("1509 Culver St", "5"));
+		assertNotNull(fdao.updateFireStation("3", "1509 Culver St"));
 	}
 
 	@Test
 	public void deleteFS() {
-		assertTrue(fdao.deleteFSByStationAndAddress("3", "1509 Culver St"));
+		assertTrue(fdao.deleteFSByStationAndAddress("4", "4500 Culver"));
 	}
 
-	@SuppressWarnings("unlikely-arg-type")
 	@Test
 	public void FindFS() {
-		FireStation fs = new FireStation();
-		equals(fs);
+		assertNotNull(fdao.findFSByStationAndAddress("3", "1509 Culver St"));
 	}
 }
