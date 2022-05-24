@@ -28,7 +28,6 @@ public class PersonDAOTest {
 	@BeforeAll
 	private static void setUp() {
 		pdao = new PersonDAO();
-
 	}
 
 	@BeforeEach

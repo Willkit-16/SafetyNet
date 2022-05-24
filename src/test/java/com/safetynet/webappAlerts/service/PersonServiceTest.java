@@ -1,6 +1,6 @@
 package com.safetynet.webappAlerts.service;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.Assert.assertEquals;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -13,71 +13,45 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.safetynet.webappAlerts.config.AlertsReaderTest;
-import com.safetynet.webappAlerts.dao.FireStationDAO;
-import com.safetynet.webappAlerts.dao.MedicalRecordsDAO;
 import com.safetynet.webappAlerts.dao.PersonDAO;
-import com.safetynet.webappAlerts.dto.ChildAlertDTO;
-import com.safetynet.webappAlerts.dto.ChildAlertListDTO;
-import com.safetynet.webappAlerts.dto.FireDTO;
-import com.safetynet.webappAlerts.dto.FireListDTO;
-import com.safetynet.webappAlerts.dto.PersonInfoDTO;
-import com.safetynet.webappAlerts.dto.PersonInfoListDTO;
 import com.safetynet.webappAlerts.model.Data;
-import com.safetynet.webappAlerts.model.FireStation;
-import com.safetynet.webappAlerts.model.MedicalRecords;
 import com.safetynet.webappAlerts.model.Person;
 
 @ExtendWith(MockitoExtension.class)
 public class PersonServiceTest {
 
+	private static PersonDAO pdao;
 	private static PersonService ps;
 
-	private Person p;
-	private FireStation f;
-	private MedicalRecords m;
-
+	@Mock
 	private static Data d;
 
 	@Mock
 	private static AlertsReaderTest ar;
-	@Mock
-	private static FireStationDAO fsdao;
-	@Mock
-	private static MedicalRecordsDAO mdao;
-	@Mock
-	private static PersonDAO pdao;
-	@Mock
-	private static ChildAlertDTO cdto;
-	@Mock
-	private static ChildAlertListDTO cldto;
-	@Mock
-	private static FireDTO fdto;
-	@Mock
-	private static FireListDTO fldto;
-	@Mock
-	private static PersonInfoDTO pidto;
-	@Mock
-	private static PersonInfoListDTO pildto;
 
 	@BeforeAll
 	private static void setUp() {
-
 		ps = new PersonService();
-		d = new Data();
-
+		pdao = new PersonDAO();
 	}
 
 	@BeforeEach
 	private void setUpTest() throws FileNotFoundException, IOException {
-		ar = new AlertsReaderTest();
-		ar.readDataFromJson();
-		pdao = new PersonDAO();
+		d = new Data();
+
+		Person p = new Person("Jack", "Smith", "4300 St", "Culver", "33500", "855-305-1100", "js@gmail.com");
+		Person pr = new Person("John", "Smith", "1500 St", "Culver", "33500", "855-305-1212", "ggjs@gmail.com");
+		Data.arrayPerson.add(p);
+		Data.arrayPerson.add(pr);
 		pdao.getPersons();
+		// créer données ici
+		// remplir les datas
 	}
 
 	@Test
-	public void ListEmailTest() {
-		assertNotNull(ps.listOfEmail("Culver"));
+	public void ListEmailTest() throws FileNotFoundException, IOException {
+		assertEquals(2, ps.listOfEmail("Culver"));
+		// vérification email
 	}
 
 }
