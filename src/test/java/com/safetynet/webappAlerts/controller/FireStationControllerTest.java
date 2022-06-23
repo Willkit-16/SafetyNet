@@ -1,8 +1,8 @@
 package com.safetynet.webappAlerts.controller;
 
-import static org.hamcrest.CoreMatchers.is;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import org.junit.jupiter.api.Test;
@@ -13,7 +13,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 //@SpringBootTest
 @AutoConfigureMockMvc
-@WebMvcTest(controllers = FireStationController.class)
+@WebMvcTest(FireStationController.class)
 public class FireStationControllerTest {
 
 	@Autowired
@@ -21,6 +21,26 @@ public class FireStationControllerTest {
 
 	@Test
 	public void testGetFireStations() throws Exception {
-		mockMvc.perform(get("/firestations")).andExpect(status().isOk()).andExpect(jsonPath("$[0].station", is("3")));
+		mockMvc.perform(get("/firestations")).andExpect(status().isOk());
+	}
+
+	@Test
+	public void testGetFireStationByNumber() throws Exception {
+		mockMvc.perform(get("/firestation/1")).andExpect(status().isOk());
+	}
+
+	@Test
+	public void testGetFireStationByStationAndAddress() throws Exception {
+		mockMvc.perform(get("/firestation/3/1509 Culver St")).andExpect(status().isOk());
+	}
+
+	@Test
+	public void testPutFireStation() throws Exception {
+		mockMvc.perform(put("/firestation/3/1700 Culver St")).andExpect(status().isOk());
+	}
+
+	@Test
+	public void testDeleteFireStation() throws Exception {
+		mockMvc.perform(delete("/firestation/3/1509 Culver St")).andExpect(status().isOk());
 	}
 }

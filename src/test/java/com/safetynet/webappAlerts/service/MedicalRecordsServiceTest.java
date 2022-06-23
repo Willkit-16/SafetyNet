@@ -38,7 +38,7 @@ public class MedicalRecordsServiceTest {
 	}
 
 	@Test
-	private void ListFSTest() {
+	public void floodListTest() {
 
 	}
 

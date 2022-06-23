@@ -38,8 +38,12 @@ public class FireStationServiceTest {
 	}
 
 	@Test
-	private void ListFSTest() {
+	private void findFSByNumberTest() {
 
 	}
 
+	@Test
+	public void peopleByStationTest() {
+
+	}
 }

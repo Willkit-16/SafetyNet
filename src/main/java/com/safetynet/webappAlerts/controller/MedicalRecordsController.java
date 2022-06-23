@@ -98,7 +98,7 @@ public class MedicalRecordsController {
 	 * @param allergies   the allergies
 	 * @return the medical records
 	 */
-	@PutMapping("/medicalrecords/{firstName}/{lastName}/{birthDate}/{medications}/{allergies}")
+	@PutMapping("/medicalrecords/{firstName}/{lastName}")
 	public MedicalRecords updateMR(@PathVariable("firstName") String firstName,
 			@PathVariable("lastName") String lastName, @PathVariable("birthDate") LocalDate birthDate,
 			@PathVariable("medications") String medications, @PathVariable("allergies") String allergies) {
