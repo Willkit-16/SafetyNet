@@ -1,7 +1,6 @@
 package com.safetynet.webappAlerts.controller;
 
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,12 +53,9 @@ public class AlertsController {
 	@GetMapping("/communityEmail")
 	public ResponseEntity<List<String>> listOfEmail(@RequestParam(value = "city") String city) {
 		log.info("GET /communityEmail/?city=" + city);
-		try {
-			return ResponseEntity.ok(ps.listOfEmail(city));
-		} catch (NoSuchElementException e) {
-			log.info("GET /communityEmail/?city=" + city + " - ERROR : " + e.getMessage());
-			return ResponseEntity.notFound().build();
-		}
+
+		return ResponseEntity.ok(ps.listOfEmail(city));
+
 	}
 
 	/**
@@ -71,12 +67,9 @@ public class AlertsController {
 	@GetMapping("/phoneAlert")
 	public ResponseEntity<List<String>> listOfPhone(@RequestParam(value = "firestation") String station) {
 		log.info("GET /phoneAlert/?firestation=" + station);
-		try {
-			return ResponseEntity.ok(ps.listOfPhone(station));
-		} catch (NoSuchElementException e) {
-			log.info("GET /phoneAlert/?firestation=" + station + " - ERROR : " + e.getMessage());
-			return ResponseEntity.notFound().build();
-		}
+
+		return ResponseEntity.ok(ps.listOfPhone(station));
+
 	}
 
 	/**
@@ -89,12 +82,9 @@ public class AlertsController {
 	public ResponseEntity<PeopleByStationNumberListDTO> listOfPersonByStation(
 			@RequestParam(value = "stationNumber") String station) {
 		log.info("GET /firestation/?stationNumber=" + station);
-		try {
-			return ResponseEntity.ok(fs.listOfPeople(station));
-		} catch (NoSuchElementException e) {
-			log.info("GET /firestation/?stationNumber=" + station + " - ERROR : " + e.getMessage());
-			return ResponseEntity.notFound().build();
-		}
+
+		return ResponseEntity.ok(fs.listOfPeople(station));
+
 	}
 
 	/**
@@ -106,12 +96,8 @@ public class AlertsController {
 	@GetMapping("/childAlert")
 	public ResponseEntity<ChildAlertListDTO> listOfChildren(@RequestParam(value = "address") String personsAddress) {
 		log.info("GET /childAlert/?address=" + personsAddress);
-		try {
-			return ResponseEntity.ok(ps.listOfChildren(personsAddress));
-		} catch (NoSuchElementException e) {
-			log.info("GET /childAlert/?address=" + personsAddress + "- ERROR : " + e.getMessage());
-			return ResponseEntity.notFound().build();
-		}
+
+		return ResponseEntity.ok(ps.listOfChildren(personsAddress));
 
 	}
 
@@ -124,12 +110,9 @@ public class AlertsController {
 	@GetMapping("/fire")
 	public ResponseEntity<FireListDTO> listByAddress(@RequestParam(value = "address") String personsAddress) {
 		log.info("GET /fire/?address=" + personsAddress);
-		try {
-			return ResponseEntity.ok(ps.listByAddress(personsAddress));
-		} catch (NoSuchElementException e) {
-			log.info("GET /fire/?address=" + personsAddress + "- ERROR : " + e.getMessage());
-			return ResponseEntity.notFound().build();
-		}
+
+		return ResponseEntity.ok(ps.listByAddress(personsAddress));
+
 	}
 
 	/**
@@ -141,12 +124,8 @@ public class AlertsController {
 	@GetMapping("/flood/stations")
 	public ResponseEntity<FloodListDTO> familyByStation(@RequestParam(value = "stations") String station) {
 		log.info("GET /flood/stations/?stations=" + station);
-		try {
-			return ResponseEntity.ok(mr.familyByStation(station));
-		} catch (NoSuchElementException e) {
-			log.info("GET /flood/stations/?stations=" + station + "- ERROR : " + e.getMessage());
-			return ResponseEntity.notFound().build();
-		}
+		return ResponseEntity.ok(mr.familyByStation(station));
+
 	}
 
 	/**
@@ -160,11 +139,8 @@ public class AlertsController {
 	public ResponseEntity<PersonInfoListDTO> personInfo(@RequestParam(value = "firstName") String firstName,
 			@RequestParam(value = "lastName") String lastName) {
 		log.info("GET /personInfo?firstName=" + firstName + "lastName=" + lastName);
-		try {
-			return ResponseEntity.ok(ps.personInfo(firstName, lastName));
-		} catch (NoSuchElementException e) {
-			log.info("GET /personInfo?firstName=" + firstName + "lastName=" + lastName + "- ERROR :" + e.getMessage());
-			return ResponseEntity.notFound().build();
-		}
+
+		return ResponseEntity.ok(ps.personInfo(firstName, lastName));
+
 	}
 }

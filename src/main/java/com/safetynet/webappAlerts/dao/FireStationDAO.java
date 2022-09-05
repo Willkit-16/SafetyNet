@@ -11,16 +11,16 @@ import com.safetynet.webappAlerts.model.FireStation;
 public class FireStationDAO {
 
 	public FireStation addFireStation(FireStation fr) {
-		Data.arrayFS.add(fr);
+		Data.getArrayFS().add(fr);
 		return fr;
 	}
 
 	public List<FireStation> getFireStations() {
-		return Data.arrayFS;
+		return Data.getArrayFS();
 	}
 
 	public FireStation findFSByStationAndAddress(String station, String address) {
-		for (FireStation f : Data.arrayFS) {
+		for (FireStation f : Data.getArrayFS()) {
 			if (f.station.equals(station) && f.address.equals(address)) {
 				return f;
 			}
@@ -29,17 +29,17 @@ public class FireStationDAO {
 	}
 
 	public boolean deleteFSByStationAndAddress(String station, String address) {
-		for (FireStation f : Data.arrayFS) {
+		for (FireStation f : Data.getArrayFS()) {
 			if (f.station.equals(station) && f.address.equals(address)) {
-				return Data.arrayFS.remove(f);
+				return Data.getArrayFS().remove(f);
 			}
 		}
 		return false;
 	}
 
 	public FireStation updateFireStation(String station, String address) {
-		for (FireStation f : Data.arrayFS)
-			if (f.station.equals(station) && f.address.equals(address)) {
+		for (FireStation f : Data.getArrayFS())
+			if (f.address.equals(address)) {
 				f.setStation(station);
 				return f;
 			}

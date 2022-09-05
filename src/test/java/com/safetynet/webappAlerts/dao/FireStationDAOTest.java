@@ -7,15 +7,14 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import com.safetynet.webappAlerts.config.AlertsReaderTest;
 import com.safetynet.webappAlerts.model.Data;
 import com.safetynet.webappAlerts.model.FireStation;
 
-@ExtendWith(MockitoExtension.class)
+@SpringBootTest
 public class FireStationDAOTest {
 
 	private static FireStationDAO fdao;
@@ -38,8 +37,8 @@ public class FireStationDAOTest {
 		FireStation fs = new FireStation("4500 Culver", "4");
 		FireStation fsB = new FireStation("1509 Culver St", "3");
 
-		Data.arrayFS.add(fs);
-		Data.arrayFS.add(fsB);
+		Data.getArrayFS().add(fs);
+		Data.getArrayFS().add(fsB);
 
 		fdao.updateFireStation("3", "1509 Culver St");
 	}
@@ -52,7 +51,7 @@ public class FireStationDAOTest {
 
 	@Test
 	public void updateFSError() {
-		assertNull(fdao.updateFireStation("2", null));
+		assertNull(fdao.updateFireStation("2", "144"));
 	}
 
 	@Test

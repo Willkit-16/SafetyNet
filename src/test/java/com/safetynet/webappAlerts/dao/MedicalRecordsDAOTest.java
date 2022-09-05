@@ -10,15 +10,14 @@ import java.time.format.DateTimeFormatter;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import com.safetynet.webappAlerts.config.AlertsReaderTest;
 import com.safetynet.webappAlerts.model.Data;
 import com.safetynet.webappAlerts.model.MedicalRecords;
 
-@ExtendWith(MockitoExtension.class)
+@SpringBootTest
 public class MedicalRecordsDAOTest {
 
 	@SuppressWarnings("unused")
@@ -40,7 +39,7 @@ public class MedicalRecordsDAOTest {
 		data = new Data();
 		MedicalRecords mr = new MedicalRecords("Jack", "Smith",
 				LocalDate.parse("05-06-2010", DateTimeFormatter.ofPattern("MM-dd-yyyy")), "Aznol:350g", "peanuts");
-		Data.arrayMR.add(mr);
+		Data.getArrayMR().add(mr);
 	}
 
 	@Test

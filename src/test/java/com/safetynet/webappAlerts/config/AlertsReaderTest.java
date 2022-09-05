@@ -48,12 +48,12 @@ public class AlertsReaderTest {
 						jPerson.get("address").toString(), jPerson.get("city").toString(),
 						jPerson.get("zip").toString(), jPerson.get("phone").toString(),
 						jPerson.get("email").toString());
-				Data.arrayPerson.add(person);
+				Data.getArrayPerson().add(person);
 			}
 			while (iteratorFireStations.hasNext()) {
 				JSONObject jFS = iteratorFireStations.next();
 				FireStation fireS = new FireStation(jFS.get("address").toString(), jFS.get("station").toString());
-				Data.arrayFS.add(fireS);
+				Data.getArrayFS().add(fireS);
 			}
 			while (iteratorMedicalRecords.hasNext()) {
 				JSONObject jMR = iteratorMedicalRecords.next();
@@ -62,7 +62,7 @@ public class AlertsReaderTest {
 				MedicalRecords medicalR = new MedicalRecords(jMR.get("firstName").toString(),
 						jMR.get("lastName").toString(), date, jMR.get("medications").toString(),
 						jMR.get("allergies").toString());
-				Data.arrayMR.add(medicalR);
+				Data.getArrayMR().add(medicalR);
 			}
 
 		} catch (ParseException e) {

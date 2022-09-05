@@ -96,9 +96,12 @@ public class MedicalRecordsService {
 	 * @param allergies   the allergies
 	 * @return the medical records
 	 */
-	public MedicalRecords updateMR(String firstName, String lastName, LocalDate birthDate, String medications,
+	public MedicalRecords updateMR(String firstName, String lastName, String birthDate, String medications,
 			String allergies) {
-		return mrdao.updateMR(firstName, lastName, birthDate, medications, allergies);
+
+		LocalDate localDate = LocalDate.parse(birthDate);
+
+		return mrdao.updateMR(firstName, lastName, localDate, medications, allergies);
 	}
 
 	/**

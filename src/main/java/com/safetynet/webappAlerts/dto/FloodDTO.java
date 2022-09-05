@@ -65,9 +65,4 @@ public class FloodDTO {
 		this.allergies = allergies;
 	}
 
-	@Override
-	public String toString() {
-		return "Flood DTO{" + firstName + "," + lastName + "," + phone + "," + age + "," + medications + "," + allergies
-				+ "," + address + '}';
-	}
 }

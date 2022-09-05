@@ -1,30 +1,37 @@
 package com.safetynet.webappAlerts.dto;
 
-import lombok.Data;
-
-@Data
 public class ChildAlertDTO {
 
 	String firstName;
 	String lastName;
 	Long age;
 
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public Long getAge() {
+		return age;
+	}
+
+	public void setAge(Long age) {
+		this.age = age;
+	}
+
 	public ChildAlertDTO() {
 
 	}
 
-	public ChildAlertDTO(String firstName, String lastName, Long age) {
-
-		this.firstName = firstName;
-
-		this.lastName = lastName;
-
-		this.age = age;
-
-	}
-
-	@Override
-	public String toString() {
-		return "Children {" + firstName + "," + lastName + "," + age + '}';
-	}
 }

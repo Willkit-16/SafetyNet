@@ -65,9 +65,4 @@ public class PersonInfoDTO {
 		this.allergies = allergies;
 	}
 
-	@Override
-	public String toString() {
-		return "Person Info {" + firstName + "," + lastName + "," + address + "," + age + "," + mail + "," + medications
-				+ "," + allergies + '}';
-	}
 }

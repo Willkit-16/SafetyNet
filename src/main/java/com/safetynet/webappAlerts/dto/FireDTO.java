@@ -57,10 +57,4 @@ public class FireDTO {
 		this.phone = phone;
 	}
 
-	@Override
-	public String toString() {
-		return "People by address {" + firstName + "," + lastName + "," + age + "," + medications + "," + allergies
-				+ "," + phone + '}';
-	}
-
 }

@@ -101,8 +101,8 @@ public class FireStationController {
 	 * @return the fire station
 	 */
 	@PutMapping("/firestation/{station}/{address}")
-	public FireStation updateFireStation(@PathVariable("station") String station,
-			@PathVariable("address") String address) {
+	public FireStation updateFireStation(@PathVariable("address") String address,
+			@PathVariable("station") String station) {
 		return fs.updateFireStation(station, address);
 	}
 }

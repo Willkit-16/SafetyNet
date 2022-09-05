@@ -1,6 +1,5 @@
 package com.safetynet.webappAlerts.controller;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -98,9 +97,9 @@ public class MedicalRecordsController {
 	 * @param allergies   the allergies
 	 * @return the medical records
 	 */
-	@PutMapping("/medicalrecords/{firstName}/{lastName}")
+	@PutMapping("/medicalrecords/{firstName}/{lastName}/{birthDate}/{medications}/{allergies}")
 	public MedicalRecords updateMR(@PathVariable("firstName") String firstName,
-			@PathVariable("lastName") String lastName, @PathVariable("birthDate") LocalDate birthDate,
+			@PathVariable("lastName") String lastName, @PathVariable("birthDate") String birthDate,
 			@PathVariable("medications") String medications, @PathVariable("allergies") String allergies) {
 		return mr.updateMR(firstName, lastName, birthDate, medications, allergies);
 
