@@ -1,0 +1,14 @@
+2022-09-07 22:42:31.660  INFO 6892 --- [main] c.s.w.WebappAlertsApplication            : Starting WebappAlertsApplication using Java 16.0.1 on DESKTOP-LFJMSEM with PID 6892 (C:\Users\seill\OneDrive\Desktop\JAVA\Projets Openclassrooms\P5\Livrables\P-5\SafetyNet\target\classes started by seill in C:\Users\seill\OneDrive\Desktop\JAVA\Projets Openclassrooms\P5\Livrables\P-5\SafetyNet)
+2022-09-07 22:42:31.663  INFO 6892 --- [main] c.s.w.WebappAlertsApplication            : No active profile set, falling back to 1 default profile: "default"
+2022-09-07 22:42:33.237  INFO 6892 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2022-09-07 22:42:33.249  INFO 6892 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2022-09-07 22:42:33.249  INFO 6892 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.58]
+2022-09-07 22:42:33.370  INFO 6892 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2022-09-07 22:42:33.370  INFO 6892 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1600 ms
+2022-09-07 22:42:34.144  INFO 6892 --- [main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 4 endpoint(s) beneath base path '/actuator'
+2022-09-07 22:42:34.216  INFO 6892 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2022-09-07 22:42:34.234  INFO 6892 --- [main] c.s.w.WebappAlertsApplication            : Started WebappAlertsApplication in 3.02 seconds (JVM running for 3.501)
+2022-09-07 22:42:41.872  INFO 6892 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2022-09-07 22:42:41.873  INFO 6892 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2022-09-07 22:42:41.879  INFO 6892 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 5 ms
+2022-09-07 22:42:41.934  INFO 6892 --- [http-nio-8080-exec-1] AlertsController                         : GET /fire/?address=1509 Culver St

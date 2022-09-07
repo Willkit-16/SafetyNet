@@ -37,5 +37,4 @@ public class MedicalRecordsControllerTest {
 	public void testDeleteMedicalRecordsByName() throws Exception {
 		mockMvc.perform(delete("/medicalrecords/John/Boyd")).andExpect(status().isOk());
 	}
-
 }
